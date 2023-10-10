@@ -7,7 +7,7 @@ import * as React from 'react';
 import { cn } from '@/lib/utils';
 
 import { Icons } from '@/components/icons';
-import { Logo } from '@/components/logo';
+import { LogoBoostSEO } from '@/components/logo';
 import { MobileNav } from '@/components/mobile-nav';
 import { Button } from '@/components/ui/button';
 import {
@@ -17,7 +17,6 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
-import { siteConfig } from '@/config';
 import { ExtendedWebsiteView } from '@/packages/apigen';
 
 import { MainNavItem } from '@/types';
@@ -26,9 +25,15 @@ interface MainNavProps {
   items?: MainNavItem[];
   children?: React.ReactNode;
   websiteDetails: ExtendedWebsiteView | undefined;
+  basePath?: string;
 }
 
-export function MainNav({ items, children, websiteDetails }: MainNavProps) {
+export function MainNav({
+  items,
+  children,
+  websiteDetails,
+  basePath,
+}: MainNavProps) {
   const segment = useSelectedLayoutSegment();
   const [showMobileMenu, setShowMobileMenu] = React.useState<boolean>(false);
 
@@ -36,12 +41,12 @@ export function MainNav({ items, children, websiteDetails }: MainNavProps) {
     <div className='flex w-full justify-between'>
       <div className='flex gap-6 md:gap-10'>
         <a
-          href={siteConfig.main_url}
+          href={websiteDetails?.url}
           className='hidden items-center space-x-2 md:flex'
         >
-          <Logo />
+          <LogoBoostSEO />
           <span className='hidden text-lg font-semibold sm:inline-block'>
-            {siteConfig.name}
+            {websiteDetails?.name}
           </span>
         </a>
         {items?.length ? (
@@ -74,7 +79,10 @@ export function MainNav({ items, children, websiteDetails }: MainNavProps) {
                   {/* <DropdownMenuLabel>Discover Topics</DropdownMenuLabel>
                   <DropdownMenuSeparator /> */}
                   {websiteDetails.tags.map((tag) => (
-                    <Link key={tag.id} href={`/category/${tag.slug}`}>
+                    <Link
+                      key={tag.id}
+                      href={`${basePath || ''}/category/${tag.slug}`}
+                    >
                       <DropdownMenuItem>{tag.name}</DropdownMenuItem>
                     </Link>
                   ))}
@@ -87,23 +95,25 @@ export function MainNav({ items, children, websiteDetails }: MainNavProps) {
           className='flex items-center space-x-2 md:hidden'
           onClick={() => setShowMobileMenu(!showMobileMenu)}
         >
-          {showMobileMenu ? <Icons.close /> : <Logo />}
+          {showMobileMenu ? <Icons.close /> : <LogoBoostSEO />}
           <span className='font-bold'>Menu</span>
         </button>
         {showMobileMenu && items && (
-          <MobileNav items={items}>{children}</MobileNav>
+          <MobileNav
+            items={items}
+            basePath={basePath}
+            websiteDetails={websiteDetails}
+          >
+            {children}
+          </MobileNav>
         )}
       </div>
 
-      {siteConfig.actionButton &&
-        siteConfig.actionButton.text &&
-        siteConfig.actionButton.href && (
-          <a href={siteConfig.actionButton.href}>
-            <Button size='sm' variant='default'>
-              {siteConfig.actionButton.text}
-            </Button>
-          </a>
-        )}
+      <a href='https://www.boostseo.ai/'>
+        <Button size='sm' variant='default'>
+          Get AI Blogs
+        </Button>
+      </a>
     </div>
   );
 }

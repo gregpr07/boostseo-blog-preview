@@ -1,3 +1,4 @@
+import { Route } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -10,14 +11,15 @@ import { BasicBlogView } from '@/packages/apigen';
 
 interface BlogPreviewCardProps {
   blog: BasicBlogView;
+  basePath?: URL | Route;
   className?: string;
 }
 
-export const BlogPreviewCard = ({ blog }: BlogPreviewCardProps) => {
+export const BlogPreviewCard = ({ blog, basePath }: BlogPreviewCardProps) => {
   return (
     <Link
       key={blog.id}
-      href={`/blogs/${blog.slug}`}
+      href={`${basePath || ''}/blogs/${blog.slug}`}
       className='group relative flex h-full flex-col space-y-2 rounded-lg transition'
     >
       {blog.thumbnail && blog.thumbnail.thumbnailUrl && (

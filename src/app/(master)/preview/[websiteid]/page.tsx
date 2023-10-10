@@ -1,16 +1,20 @@
 import Link from 'next/link';
 
-import { fetchLatestBlogs, getWebsiteDetails } from '@/lib/api/blogs';
+import { fetchLatestBlogs, getWebsiteDetails } from '@/lib/api/blogs-master';
 
 import { BlogPreviewCard } from '@/components/blogs/blog-preview-card';
 import { Button } from '@/components/ui/button';
 
-import { siteConfig } from '@/config';
+interface BlogPageProps {
+  params: {
+    websiteid: string;
+  };
+}
 
-export default async function BlogPage() {
+export default async function BlogPage({ params }: BlogPageProps) {
   const [websiteDetails, blogs] = await Promise.all([
-    getWebsiteDetails(),
-    fetchLatestBlogs(5),
+    getWebsiteDetails(params.websiteid),
+    fetchLatestBlogs(5, params.websiteid),
   ]);
 
   return (
@@ -18,10 +22,10 @@ export default async function BlogPage() {
       <div className='flex flex-col items-start gap-4 md:flex-row md:justify-between md:gap-8'>
         <div className='flex-1 space-y-4'>
           <h1 className='font-heading inline-block text-3xl font-semibold tracking-tight lg:text-4xl'>
-            {siteConfig.title || websiteDetails?.name + ' Blogs'}
+            {websiteDetails?.name + ' - Blog Preview'}
           </h1>
           <p className='text-muted-foreground text-lg'>
-            {siteConfig.description || websiteDetails?.summary}
+            {websiteDetails?.summary}
           </p>
         </div>
       </div>
@@ -29,17 +33,24 @@ export default async function BlogPage() {
       {blogs?.length ? (
         <div>
           <div className='my-8 md:mb-16'>
-            <BlogPreviewCard blog={blogs[0]} />
+            <BlogPreviewCard
+              blog={blogs[0]}
+              basePath={`/preview/${params.websiteid}`}
+            />
           </div>
 
           <div className='grid gap-10 pb-16 md:grid-cols-2'>
             {blogs.slice(1).map((blog) => (
-              <BlogPreviewCard blog={blog} key={blog.id} />
+              <BlogPreviewCard
+                blog={blog}
+                key={blog.id}
+                basePath={`/preview/${params.websiteid}`}
+              />
             ))}
           </div>
 
           <div className='flex justify-center py-6'>
-            <Link href='/blogs'>
+            <Link href={`/preview/${params.websiteid}/blogs`}>
               <Button className='btn btn-primary' variant='outline'>
                 Read More Blogs
               </Button>

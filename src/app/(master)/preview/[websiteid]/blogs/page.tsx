@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 
-import { fetchLatestBlogsPaginated } from '@/lib/api/blogs';
+import { fetchLatestBlogsPaginated } from '@/lib/api/blogs-master';
 
 import { BlogPreviewCard } from '@/components/blogs/blog-preview-card';
 import Pagination from '@/components/pagination';
@@ -13,14 +13,19 @@ interface AllBlogsPageProps {
   searchParams: {
     page: string;
   };
+  params: {
+    websiteid: string;
+  };
 }
 
 export default async function AllBlogsPage({
   searchParams,
+  params,
 }: AllBlogsPageProps) {
   const paginatedBlogs = await fetchLatestBlogsPaginated(
     10,
-    parseInt(searchParams.page) || 1
+    parseInt(searchParams.page) || 1,
+    params.websiteid
   );
 
   if (!paginatedBlogs) {
@@ -42,7 +47,11 @@ export default async function AllBlogsPage({
       {blogs?.length ? (
         <div className='grid gap-10 md:grid-cols-2'>
           {blogs.map((blog) => (
-            <BlogPreviewCard blog={blog} key={blog.id} />
+            <BlogPreviewCard
+              blog={blog}
+              key={blog.id}
+              basePath={`/preview/${params.websiteid}`}
+            />
           ))}
         </div>
       ) : (
@@ -54,7 +63,7 @@ export default async function AllBlogsPage({
         <Pagination
           currentPage={parseInt(searchParams.page) || 1}
           totalPages={numberPages}
-          basePath='/blogs'
+          basePath={`/preview/${params.websiteid}/blogs`}
         />
       </div>
     </div>

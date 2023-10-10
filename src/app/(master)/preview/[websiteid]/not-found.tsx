@@ -1,17 +1,14 @@
 import { ShieldMinus } from 'lucide-react';
-import Link from 'next/link';
 
 import { cn } from '@/lib/utils';
 
-import { Button } from '@/components/ui/button';
-
-interface NotFoundPageProps {
-  // className?: string;
-  // children?: React.ReactNode;
-  // props?: React.HTMLAttributes<HTMLDivElement>;
+interface NotFoundPageParams {
+  params: {
+    websiteid: string;
+  };
 }
 
-const NotFoundPage = () => {
+const NotFoundPage = ({ params }: NotFoundPageParams) => {
   return (
     <div
       className={cn(
@@ -36,13 +33,6 @@ const NotFoundPage = () => {
         >
           The page you are looking for does not exist.
         </p>
-
-        {/* Buttons */}
-        <div className='flex flex-col'>
-          <Link className={cn()} href='/'>
-            <Button size='sm'>Return Home</Button>
-          </Link>
-        </div>
       </div>
     </div>
   );

@@ -8,6 +8,7 @@ export const environmentVariables = {
     ? constants.backendUrl
     : process.env.API_BACKEND_URL?.replace(/\/$/, '') || constants.backendUrl,
   API_KEY: process.env.API_KEY || '',
+  API_MASTER_KEY: process.env.API_MASTER_KEY || '',
 };
 
-export const REVALIDATE_TIME = isProd ? 3600 * 1 : 0; // 1 hours in prod, 0 in dev; for server side rendering
+export const REVALIDATE_TIME = isProd ? 10 * 1 : 0; // 1 hours in prod, 0 in dev; for server side rendering

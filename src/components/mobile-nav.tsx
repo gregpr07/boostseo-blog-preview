@@ -4,18 +4,26 @@ import * as React from 'react';
 import { cn } from '@/lib/utils';
 import { useLockBody } from '@/hooks/use-lock-body';
 
-import { Logo } from '@/components/logo';
+import { LogoBoostSEO } from '@/components/logo';
 
-import { siteConfig } from '@/config';
+import { ExtendedWebsiteView } from '@/packages/apigen';
 
 import { MainNavItem } from '@/types';
 
 interface MobileNavProps {
   items: MainNavItem[];
   children?: React.ReactNode;
+  websiteDetails: ExtendedWebsiteView | undefined;
+
+  basePath?: string;
 }
 
-export function MobileNav({ items, children }: MobileNavProps) {
+export function MobileNav({
+  items,
+  children,
+  basePath,
+  websiteDetails,
+}: MobileNavProps) {
   useLockBody();
 
   return (
@@ -25,10 +33,13 @@ export function MobileNav({ items, children }: MobileNavProps) {
       )}
     >
       <div className='bg-popover text-popover-foreground relative z-20 grid gap-6 rounded-md p-4 shadow-md'>
-        <Link href='/' className='flex items-center space-x-2'>
-          <Logo />
+        <Link
+          href={`${basePath || ''}/`}
+          className='flex items-center space-x-2'
+        >
+          <LogoBoostSEO />
 
-          <span className='font-bold'>{siteConfig.name}</span>
+          <span className='font-bold'>{websiteDetails?.name}</span>
         </Link>
         <nav className='grid grid-flow-row auto-rows-max text-sm'>
           {items
