@@ -111,7 +111,7 @@ const AuthorPage = async ({ params }: BlogPageProps) => {
               <BlogPreviewCard
                 blog={blog}
                 key={blog.id}
-                basePath={`/preview/${params.websiteid}`}
+                basePath={`/${params.websiteid}`}
               />
             ))}
           </div>
@@ -121,7 +121,7 @@ const AuthorPage = async ({ params }: BlogPageProps) => {
 
         <div className='flex justify-center pt-10'>
           <Link
-            href={`/preview/${params.websiteid}`}
+            href={`/${params.websiteid}`}
             className={cn(buttonVariants({ variant: 'ghost' }))}
           >
             <Icons.chevronLeft className='mr-2 h-4 w-4' />

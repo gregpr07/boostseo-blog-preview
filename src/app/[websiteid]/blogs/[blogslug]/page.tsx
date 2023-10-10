@@ -79,7 +79,7 @@ const BlogPage = async ({ params }: BlogPageProps) => {
       <article className='container relative py-6 lg:py-10'>
         <div className='mx-auto max-w-3xl'>
           <Link
-            href={`/preview/${params.websiteid}`}
+            href={`/${params.websiteid}`}
             className={cn(
               buttonVariants({ variant: 'ghost' }),
               'text-muted-foreground absolute top-14 hidden h-0 translate-x-[-200px] xl:inline-flex'
@@ -113,7 +113,7 @@ const BlogPage = async ({ params }: BlogPageProps) => {
                 <div className='flex items-center space-x-3 pt-4'>
                   {blog.author.imageUrl && (
                     <Link
-                      href={`/preview/${params.websiteid}/author/${blog.author.slug}`}
+                      href={`/${params.websiteid}/author/${blog.author.slug}`}
                     >
                       <Image
                         src={blog.author.imageUrl}
@@ -126,7 +126,7 @@ const BlogPage = async ({ params }: BlogPageProps) => {
                   )}
                   <div className='grid items-stretch justify-between gap-y-1'>
                     <Link
-                      href={`/preview/${params.websiteid}/author/${blog.author.slug}`}
+                      href={`/${params.websiteid}/author/${blog.author.slug}`}
                     >
                       <div className='text-left leading-tight'>
                         <h3 className='text-lg font-medium'>
@@ -190,7 +190,7 @@ const BlogPage = async ({ params }: BlogPageProps) => {
                   {blog.tags.map((tag) => (
                     <Link
                       key={tag.id}
-                      href={`/preview/${params.websiteid}/category/${tag.slug}`}
+                      href={`/${params.websiteid}/category/${tag.slug}`}
                     >
                       <Badge variant='outline' className='capitalize'>
                         {tag.name}
@@ -238,7 +238,7 @@ const BlogPage = async ({ params }: BlogPageProps) => {
                   <BlogPreviewCard
                     blog={blog}
                     key={blog.id}
-                    basePath={`/preview/${params.websiteid}`}
+                    basePath={`/${params.websiteid}`}
                   />
                 ))}
               </div>
@@ -247,7 +247,7 @@ const BlogPage = async ({ params }: BlogPageProps) => {
 
           <div className='flex justify-center py-6 lg:py-10'>
             <Link
-              href={`/preview/${params.websiteid}`}
+              href={`/${params.websiteid}`}
               className={cn(buttonVariants({ variant: 'ghost' }))}
             >
               <Icons.chevronLeft className='mr-2 h-4 w-4' />

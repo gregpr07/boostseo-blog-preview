@@ -35,7 +35,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
           <div className='my-8 md:mb-16'>
             <BlogPreviewCard
               blog={blogs[0]}
-              basePath={`/preview/${params.websiteid}`}
+              basePath={`/${params.websiteid}`}
             />
           </div>
 
@@ -44,13 +44,13 @@ export default async function BlogPage({ params }: BlogPageProps) {
               <BlogPreviewCard
                 blog={blog}
                 key={blog.id}
-                basePath={`/preview/${params.websiteid}`}
+                basePath={`/${params.websiteid}`}
               />
             ))}
           </div>
 
           <div className='flex justify-center py-6'>
-            <Link href={`/preview/${params.websiteid}/blogs`}>
+            <Link href={`/${params.websiteid}/blogs`}>
               <Button className='btn btn-primary' variant='outline'>
                 Read More Blogs
               </Button>

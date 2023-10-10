@@ -79,14 +79,14 @@ export default async function MarketingLayout({
                   items={[
                     {
                       title: 'Home',
-                      href: `/preview/${params.websiteid}`,
+                      href: `/${params.websiteid}`,
                     },
                     {
                       title: 'All Blogs',
-                      href: `/preview/${params.websiteid}/blogs`,
+                      href: `/${params.websiteid}/blogs`,
                     },
                   ]}
-                  basePath={`/preview/${params.websiteid}`}
+                  basePath={`/${params.websiteid}`}
                   websiteDetails={websiteDetails}
                 />
               </div>

@@ -50,7 +50,7 @@ export default async function AllBlogsPage({
             <BlogPreviewCard
               blog={blog}
               key={blog.id}
-              basePath={`/preview/${params.websiteid}`}
+              basePath={`/${params.websiteid}`}
             />
           ))}
         </div>
@@ -63,7 +63,7 @@ export default async function AllBlogsPage({
         <Pagination
           currentPage={parseInt(searchParams.page) || 1}
           totalPages={numberPages}
-          basePath={`/preview/${params.websiteid}/blogs`}
+          basePath={`/${params.websiteid}/blogs`}
         />
       </div>
     </div>
