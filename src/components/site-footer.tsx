@@ -16,7 +16,7 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
           <LogoBoostSEO />
 
           <p className='text-center text-sm leading-loose md:text-left'>
-            Built by Boost SEO.
+            Built by BoostSeo.
           </p>
         </a>
         <ModeToggle />
