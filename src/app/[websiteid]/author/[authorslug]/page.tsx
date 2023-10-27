@@ -21,7 +21,7 @@ interface BlogPageProps {
 export async function generateMetadata({
   params,
 }: BlogPageProps): Promise<Metadata> {
-  const author = await fetchAuthor(params.authorslug);
+  const author = await fetchAuthor(params.authorslug, params.websiteid);
 
   // if (!blog || !blog.content) { }
   if (!author) {
@@ -62,7 +62,7 @@ export async function generateMetadata({
 }
 
 const AuthorPage = async ({ params }: BlogPageProps) => {
-  const author = await fetchAuthor(params.authorslug);
+  const author = await fetchAuthor(params.authorslug, params.websiteid);
 
   // if (!blog || !blog.content) { }
   if (!author) {

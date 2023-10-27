@@ -19,7 +19,7 @@ interface BlogPageProps {
 export async function generateMetadata({
   params,
 }: BlogPageProps): Promise<Metadata> {
-  const tag = await fetchTag(params.categoryslug);
+  const tag = await fetchTag(params.categoryslug, params.websiteid);
 
   // if (!blog || !blog.content) { }
   if (!tag) {
@@ -51,7 +51,7 @@ export async function generateMetadata({
 }
 
 const AuthorPage = async ({ params }: BlogPageProps) => {
-  const tag = await fetchTag(params.categoryslug);
+  const tag = await fetchTag(params.categoryslug, params.websiteid);
 
   // if (!blog || !blog.content) { }
   if (!tag) {

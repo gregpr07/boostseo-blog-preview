@@ -111,12 +111,13 @@ export const fetchAuthors = async (websiteId: string) => {
   }
 };
 
-export const fetchAuthor = async (authorSlug: string) => {
+export const fetchAuthor = async (authorSlug: string, websiteId: string) => {
   try {
     const author =
       await blogApiMasterClient.api.authorDetailsApiV1MasterAuthorDetailsGet(
         {
           authorSlug,
+          websiteId,
         },
         { next: { revalidate: REVALIDATE_TIME } }
       );
@@ -143,12 +144,13 @@ export const fetchTags = async (websiteId: string) => {
   }
 };
 
-export const fetchTag = async (tagSlug: string) => {
+export const fetchTag = async (tagSlug: string, websiteId: string) => {
   try {
     const tag =
       await blogApiMasterClient.api.tagDetailsApiV1MasterTagDetailsGet(
         {
           tagSlug,
+          websiteId,
         },
         { next: { revalidate: REVALIDATE_TIME } }
       );
